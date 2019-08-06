@@ -4,9 +4,9 @@ var contactController = ContactController.prototype;
 // Constructor
 function ContactController() {}
 
+//Method for getting  all contact using mongoose method
 contactController.getAllContacts = function(callback) {
   contactModel.find({}, function(err, res) {
-    console.log("contactModel===========err", err, res);
     if (err) {
       callback(err);
     }
@@ -14,16 +14,18 @@ contactController.getAllContacts = function(callback) {
   });
 };
 
-contactController.getOneContact = function(params,callback) {
-    contactModel.findOne({name : params}, function(err, res) {
-      console.log("contactModel===========err", err, res);
-      if (err) {
-        callback(err);
-      }
-      callback(null, res);
-    });
-  };
+//Method for getting a contact using mongoose method
 
+contactController.getOneContact = function(params, callback) {
+  contactModel.findOne({ name: params }, function(err, res) {
+    if (err) {
+      callback(err);
+    }
+    callback(null, res);
+  });
+};
+
+//Method for creating a contact using mongoose method
 contactController.createContact = function(request, callback) {
   var contact = new contactModel(request);
   contact
@@ -36,9 +38,9 @@ contactController.createContact = function(request, callback) {
     });
 };
 
+//Method for updating a contact using mongoose method
 contactController.updateContact = function(name, request, callback) {
   contactModel.findOne({ name: name }, function(err, contact) {
-    console.log("found contact========", err, contact);
     if (err) {
       callback(err);
     }
@@ -49,9 +51,10 @@ contactController.updateContact = function(name, request, callback) {
   });
 };
 
+//Method for deleting a contact using mongoose method
+
 contactController.deleteContact = function(name, callback) {
   contactModel.findOne({ name: name }, function(err, contact) {
-    console.log("found contact========", err, contact);
     if (err) {
       callback(err);
     }

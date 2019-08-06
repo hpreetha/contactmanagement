@@ -5,14 +5,15 @@ const router = express.Router();
 const ContactController = require("../controllers/contact.controller");
 const contactController = new ContactController();
 
-//Require the helper methods to construct the response
-
+//Require the helper methods to construct the response and validates the input
 const responseBuilder = require("../helpers/response.builder");
 const validator = require("../helpers/request.validator");
 
+// Routing to corresponding method for getting all contact using controller, when we receive GET operation
 router.get("/", function(req, res) {
   contactController.getAllContacts(function(err, response) {
     if (err) {
+      //Construct the error response for any unknown error
       const jsonResponse = responseBuilder.getResponseMetaData(
         "9999",
         err.message
@@ -20,6 +21,7 @@ router.get("/", function(req, res) {
       res.status(500);
       res.json(jsonResponse);
     } else {
+      //Construct the success response
       const jsonResponse = responseBuilder.getResponseMetaData(
         "0000",
         "SUCCESS"
@@ -31,9 +33,11 @@ router.get("/", function(req, res) {
   });
 });
 
+// Routing to corresponding method for getting one particular contact using controller, when we receive GET operation
 router.get("/:name", function(req, res) {
   const params = req.params.name;
   if (!params) {
+    //Construct the error response for Mandatory param missing
     const jsonResponse = responseBuilder.getResponseMetaData(
       "1000",
       "MANDATORY PARAM MISSING"
@@ -43,6 +47,7 @@ router.get("/:name", function(req, res) {
   } else {
     contactController.getOneContact(params, function(err, response) {
       if (err) {
+        //Construct the error response for any unknown error
         const jsonResponse = responseBuilder.getResponseMetaData(
           "9999",
           err.message
@@ -50,6 +55,7 @@ router.get("/:name", function(req, res) {
         res.status(500);
         res.json(jsonResponse);
       } else {
+        //Construct the success response
         const jsonResponse = responseBuilder.getResponseMetaData(
           "0000",
           "SUCCESS"
@@ -62,10 +68,12 @@ router.get("/:name", function(req, res) {
   }
 });
 
+// Routing to corresponding method for adding the contact using controller, when we receive POST operation
 router.post("/", function(req, res) {
   const jsonRequest = req.body;
   console.log("jsonRequest", jsonRequest);
   if (!validator.createContactValidator(jsonRequest)) {
+    //Construct the error response for Mandatory param missing
     const jsonResponse = responseBuilder.getResponseMetaData(
       "1000",
       "MANDATORY PARAM MISSING"
@@ -75,6 +83,7 @@ router.post("/", function(req, res) {
   } else {
     contactController.createContact(jsonRequest, function(err, response) {
       if (err) {
+        //Construct the error response for any unknown error
         const jsonResponse = responseBuilder.getResponseMetaData(
           "9999",
           err.message
@@ -82,6 +91,7 @@ router.post("/", function(req, res) {
         res.status(500);
         res.json(jsonResponse);
       } else {
+        //Construct the success response
         const jsonResponse = responseBuilder.getResponseMetaData(
           "0000",
           "SUCCESS"
@@ -93,11 +103,13 @@ router.post("/", function(req, res) {
   }
 });
 
+// Routing to corresponding method in updating the data using  controller, when we receive PUT operation
 router.put("/:name", function(req, res) {
   const params = req.params.name;
   const jsonRequest = req.body;
   console.log("jsonRequest", jsonRequest, params);
   if (!params) {
+    //Construct the error response for Mandatory param missing
     const jsonResponse = responseBuilder.getResponseMetaData(
       "1000",
       "MANDATORY PARAM MISSING"
@@ -110,6 +122,7 @@ router.put("/:name", function(req, res) {
       response
     ) {
       if (err) {
+        //Construct the error response for any unknown error
         const jsonResponse = responseBuilder.getResponseMetaData(
           "9999",
           err.message
@@ -117,6 +130,7 @@ router.put("/:name", function(req, res) {
         res.status(500);
         res.json(jsonResponse);
       } else {
+        //Construct the success response
         const jsonResponse = responseBuilder.getResponseMetaData(
           "0000",
           "SUCCESS"
@@ -128,9 +142,11 @@ router.put("/:name", function(req, res) {
   }
 });
 
+// Routing to corresponding method in delete controller, when we receive delete operation
 router.delete("/:name", function(req, res) {
   const params = req.params.name;
   if (!params) {
+    //Construct the error response for Mandatory param missing
     const jsonResponse = responseBuilder.getResponseMetaData(
       "1000",
       "MANDATORY PARAM MISSING"
@@ -140,6 +156,7 @@ router.delete("/:name", function(req, res) {
   } else {
     contactController.deleteContact(params, function(err, response) {
       if (err) {
+        //Construct the error response for any unknown error
         const jsonResponse = responseBuilder.getResponseMetaData(
           "9999",
           err.message
@@ -147,6 +164,7 @@ router.delete("/:name", function(req, res) {
         res.status(500);
         res.json(jsonResponse);
       } else {
+        //Construct the success response
         const jsonResponse = responseBuilder.getResponseMetaData(
           "0000",
           "SUCCESS"
