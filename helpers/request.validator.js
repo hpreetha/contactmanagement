@@ -10,6 +10,16 @@ function createContactValidator(jsonRequest) {
   }
   return isRequestValid;
 }
+
+function createContactGroupValidator(jsonRequest) {
+    let isRequestValid = true;
+    if (!jsonRequest.name || !jsonRequest.contacts) {
+      isRequestValid = false;
+      return isRequestValid;
+    }
+    return isRequestValid;
+  }
 module.exports = {
-  createContactValidator: createContactValidator
+  createContactValidator: createContactValidator,
+  createContactGroupValidator : createContactGroupValidator
 };

@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 var Contact = require("./contact.model");
 
 var contactGroupSchema = mongoose.Schema({
