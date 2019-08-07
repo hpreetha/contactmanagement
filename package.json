@@ -4,7 +4,7 @@
   "description": "an app to save the contact and organise them",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests",
     "dev": "nodemon contactmanagementapp.js"
   },
   "repository": {
@@ -23,7 +23,10 @@
     "mongoose": "^5.6.8"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1",
-    "jshint": "^2.10.2"
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "jshint": "^2.10.2",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1"
   }
 }
