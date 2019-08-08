@@ -7,7 +7,7 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 
-describe('contacts', function() {
+describe('contact', function() {
   it('should list ALL contacts on /contact GET');
   it('should list a SINGLE contact on /contact/:name GET');
   it('should add a SINGLE contact on /contact POST');
